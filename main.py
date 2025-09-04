@@ -21,10 +21,7 @@ def siteation_domain_exists(url):
         Limit=1
     )
 
-    if not result['Items']:
-        return {"status_code": 404}
-
-    return {"status_code": 200}
+    return {"status_code": 200, "exists": bool(result['Items'])}
             
 
 
