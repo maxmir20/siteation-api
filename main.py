@@ -7,6 +7,7 @@ from enum import Enum
 import validators
 
 from typing import Annotated
+from pydantic import AnyHttpUrl
 from fastapi import FastAPI, Request, Header, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
@@ -48,7 +49,7 @@ async def validate_github_request(
 
     is_valid = verify_signature(body, x_hub_signature_256)
     if not is_valid:
-        raise HTTPException(status_code=401, detail="Site-ation only accepts properly encrypted file")
+        raise HTTPException(status_code=401, detail="Invalid webhook signature")
 
     try:
         payload = json.loads(body)
@@ -59,14 +60,10 @@ async def validate_github_request(
 
 
 @app.get("/exists/")
-def siteation_domain_exists(url):
-    domain = urlparse(url).netloc
-    if not domain:
-        raise HTTPException(status_code=400, detail="Invalid URL")
-
+def siteation_domain_exists(url: AnyHttpUrl):
     try:
         result = table.query(
-            KeyConditionExpression=Key('domain').eq(domain),
+            KeyConditionExpression=Key('domain').eq(url.host),
             Limit=1
         )
 
@@ -76,24 +73,21 @@ def siteation_domain_exists(url):
             
 
 @app.get("/value/")
-def fetch_siteation_value(url):
-    parsed_url = urlparse(url)
-    domain, path = parsed_url.netloc, parsed_url.path
-    if not domain:
-        raise HTTPException(status_code=400, detail="Invalid URL")
-
+def fetch_siteation_value(url: AnyHttpUrl):
     try:
         result = table.get_item(
             Key={
-                'domain': domain,
-                'path': path
+                'domain': url.host,
+                'path': url.path
             }
         )
 
         if 'Item' not in result:
-            raise HTTPException(status_code=404, detail="Site not found")
+            return {"status_code": 204, "message": "Site not found"}
         
         return {"status_code": 200, "site_value": result['Item']['site_value']}
+    # except HTTPException as e:
+    #     raise e
     except Exception:
         raise HTTPException(status_code=500, detail="Error occurred when accessing DynamoDB")
 
@@ -106,7 +100,7 @@ async def maybe_add_siteation(request_payload: Annotated[dict, Depends(validate_
 
     update_siteation_values(siteation_urls)
 
-    return {"status_code": 201, "siteations_updated": siteation_urls}
+    return {"status_code": 200, "siteations_updated": siteation_urls}
 
 
 def verify_signature(body, signature):
@@ -120,6 +114,27 @@ def verify_signature(body, signature):
     expected_signature = hmac.new(WEBHOOK_SECRET, body, hashlib.sha256).hexdigest()
 
     return hmac.compare_digest(expected_signature, signature)
+
+
+def parse_valid_siteations(pull_request_body):
+    siteation_urls = []
+    if not pull_request_body:
+        return siteation_urls
+
+    try:
+        _, siteations = pull_request_body.split("[Site-ations]", 1)
+        siteation_lines = [line.strip() for line in siteations.splitlines() if line.strip()]
+
+        for line in siteation_lines:
+            _, url = line.split(" ", 1)
+            if not validators.url(url):
+                continue
+
+            siteation_urls.append(url)
+    except ValueError:  # error parsing our siteation line
+        pass
+
+    return siteation_urls
 
 
 #  Need to update individually because there is no batchUpdateItem API
@@ -143,25 +158,3 @@ def update_siteation_values(siteation_urls):
         return
     except Exception:
         raise HTTPException(status_code=500, detail="Error occurred while updating DynamoDB")
-
-
-def parse_valid_siteations(pull_request_body):
-    siteation_urls = []
-    if not pull_request_body:
-        return siteation_urls
-
-    try:
-        _, siteations = pull_request_body.split("[Site-ations]", 1)
-        siteation_lines = [line.strip() for line in siteations.splitlines() if line.strip()]
-
-        for line in siteation_lines:
-            _, url = line.split(" ", 1)
-            if not validators.url(url):
-                continue
-
-            siteation_urls.append(url)
-    except ValueError:  # error parsing our siteation line
-        print("we made a mistake somewhere")
-        pass
-
-    return siteation_urls
