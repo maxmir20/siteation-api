@@ -57,12 +57,22 @@ async def validate_github_request(
     except json.JSONDecodeError:
         raise HTTPException(status_code=400, detail="Invalid JSON payload")
 
-    print(payload) # temp while we confirm pull request api
-    # pull_request = payload.get('pull_request')
-    # if not
-    # is_merge_event = payload.get('pull_request', {}).get('action') == "closed" and payload
+    is_merge_event = (payload.get('action') == "closed" and payload.get('pull_request', {}).get('merged') is True)
+    return payload if is_merge_event else {}
 
-    return payload
+
+@app.post("/webhook")
+async def maybe_add_siteations(request_payload: Annotated[dict, Depends(validate_github_request)]):
+    if not request_payload:
+        return {"status_code": 200}
+
+    pull_request_body = request_payload.get('pull_request', {}).get('body')
+
+    siteation_urls = parse_valid_siteations(pull_request_body)
+
+    update_siteation_values(siteation_urls)
+
+    return {"status_code": 200, "siteations_updated": siteation_urls}
 
 
 @app.get("/exists/")
@@ -92,21 +102,8 @@ def fetch_siteation_value(url: AnyHttpUrl):
             return {"status_code": 204, "message": "Site not found"}
         
         return {"status_code": 200, "site_value": result['Item']['site_value']}
-    # except HTTPException as e:
-    #     raise e
     except Exception:
         raise HTTPException(status_code=500, detail="Error occurred when accessing DynamoDB")
-
-
-@app.post("/webhook")
-async def maybe_add_siteations(request_payload: Annotated[dict, Depends(validate_github_request)]):
-    pull_request_body = request_payload.get('pull_request', {}).get('body')
-
-    siteation_urls = parse_valid_siteations(pull_request_body)
-
-    update_siteation_values(siteation_urls)
-
-    return {"status_code": 200, "siteations_updated": siteation_urls}
 
 
 def verify_signature(body, signature):
