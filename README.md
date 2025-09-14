@@ -24,7 +24,7 @@ Site-ation aims to access as little information from your Org/Repo as possible. 
 From the Chrome Browser Extension Marketplace, install the Site-ation Extension:
 
 
-### Usage
+### Usage:
 #### Viewing Site-ations:
 While navigating around the web, if a site has any site-ations, then the extension Icon will turn Green. If you land on a specific page that has been cited, the page's site-ation score will appear next to the extension icon.
 
