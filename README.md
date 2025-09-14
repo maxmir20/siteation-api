@@ -34,6 +34,8 @@ While navigating around the web, if a site has any site-ations, then the extensi
 If you see a link you would like to save for your PR, click the Site-ation icon once to add the link to your list of Site-ations.
 Once you are on your github PR page, double-click the icon to copy all your Site-ations onto your clipboard. Site-ations will be autoformatted to allow for easy pasting. 
 
+_Note: All currently stored Site-ations are deleted once you copy them to the clipboard_
+
 After listing your Site-ations in your PR description, the site-ations will be added **_once you merge your PR_**.
 
 [Loom Video Demonstration - Adding Site-ations](https://www.loom.com/share/3365ee925f134b249249fde9e1031c56?sid=460e06c3-7d57-4a54-9b1f-bda5aa032c40)
