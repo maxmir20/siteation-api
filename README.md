@@ -29,7 +29,7 @@ Github Repo for Browser Extension: https://github.com/maxmir20/siteation-extensi
 #### Viewing Site-ations:
 While navigating around the web, if a site has any site-ations, then the extension Icon will turn Green. If you land on a specific page that has been cited, the page's site-ation score will appear next to the extension icon.
 
-[Loom Video Demo - Viewing Site-ations](https://www.loom.com/share/7c5f427c92fe4559a9cddc7f56300e76?sid=4622ccbf-466e-44a7-a679-e0c1634d21a1): 
+[Loom Video Demo - Viewing Site-ations](https://www.loom.com/share/7c5f427c92fe4559a9cddc7f56300e76?sid=4622ccbf-466e-44a7-a679-e0c1634d21a1) 
 
 #### Adding Site-ations:
 If you see a link you would like to save for your PR, click the Site-ation icon once to add the link to your list of Site-ations.
