@@ -57,7 +57,7 @@ async def validate_github_request(
     except json.JSONDecodeError:
         raise HTTPException(status_code=400, detail="Invalid JSON payload")
 
-    is_merge_event = (payload.get('action') == "closed" and payload.get('pull_request', {}).get('merged') is True)
+    is_merge_event = (payload.get('action') == 'closed' and payload.get('pull_request', {}).get('merged') is True)
     return payload if is_merge_event else {}
 
 
