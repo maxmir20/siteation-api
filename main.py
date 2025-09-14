@@ -15,6 +15,7 @@ from dotenv import load_dotenv
 import boto3
 from boto3.dynamodb.conditions import Key
 from urllib.parse import urlparse
+from furl import furl
 
 load_dotenv()
 WEBHOOK_SECRET = os.getenv('WEBHOOK_SECRET').encode("utf-8")
@@ -67,7 +68,7 @@ def siteation_domain_exists(url: AnyHttpUrl):
             Limit=1
         )
 
-        return {"status_code": 200, "exists": bool(result['Items'])}
+        return {"status_code": 200, "exists": bool(result.get('Items', False))}
     except Exception:
         raise HTTPException(status_code=500, detail="Error occurred when accessing DynamoDB")
             
@@ -93,7 +94,7 @@ def fetch_siteation_value(url: AnyHttpUrl):
 
 
 @app.post("/webhook")
-async def maybe_add_siteation(request_payload: Annotated[dict, Depends(validate_github_request)]):
+async def maybe_add_siteations(request_payload: Annotated[dict, Depends(validate_github_request)]):
     pull_request_body = request_payload.get('pull_request', {}).get('body')
 
     siteation_urls = parse_valid_siteations(pull_request_body)
@@ -127,14 +128,17 @@ def parse_valid_siteations(pull_request_body):
 
         for line in siteation_lines:
             _, url = line.split(" ", 1)
-            if not validators.url(url):
+            if not (validators.url(url) and urlparse(url).path):  # only proceed with urls that have paths
                 continue
 
-            siteation_urls.append(url)
+            # remove query params to avoid skullduggery/multiple entries
+            url_without_params = furl(url).remove(args=True, fragment=True).url
+
+            siteation_urls.append(url_without_params)
     except ValueError:  # error parsing our siteation line
         pass
 
-    return siteation_urls
+    return set(siteation_urls)  # Removes duplicates
 
 
 #  Need to update individually because there is no batchUpdateItem API
