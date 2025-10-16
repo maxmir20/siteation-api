@@ -2,16 +2,16 @@
 
 # Site-ation
 
-## What if you could use crowd-sourcing to see how often an online resource helped someone with a coding problem?
+## What if you could use crowd-sourcing to see how often an online resource helped a developer? What if you could better credit the articles and posts that helped you?
 ### That's the idea behind Site-ation, an open-source collaborative database that lets developers credit the resources (e.g. webpages/articles/blogs/StackOverflow posts/etc) that helped them write their PR. 
 
-Site-d pages appear publicly for other users, allowing you to get a sense if a page has helped others before
+Site-ations are links that you and other developers have included in PRs to indicate that it helped with your solution. Similar to research paper citations, you can then see on websites how often an article or blog post has been Site-d by others.
 
 With Site-ation installed you can:
 1. See whether the website has been Site-d by any users <img width="29" height="24" alt="Screenshot 2025-10-16 at 2 55 50 PM" src="https://github.com/user-attachments/assets/c1733181-3eda-4fe1-b1a3-3ae0d85788cb" />
-2. See how often the page you're on has been Site-d by other users <img width="23" height="24" alt="Screenshot 2025-10-16 at 2 55 37 PM" src="https://github.com/user-attachments/assets/4557cece-11d5-4a9e-a1d8-612027e62a04" />
+2. See how often the page you're on has been Site-d <img width="23" height="24" alt="Screenshot 2025-10-16 at 2 55 37 PM" src="https://github.com/user-attachments/assets/4557cece-11d5-4a9e-a1d8-612027e62a04" />
 
-3. Contribute Site-ations by including them in your PRs
+3. Contribute Site-ations by including them in your PRs in a bibliography-style format
 <img width="600" height="268" alt="Screenshot 2025-10-16 at 3 26 07 PM" src="https://github.com/user-attachments/assets/e0a89016-c75c-4dda-a13d-4fa89037386c" />
 
 
@@ -48,16 +48,20 @@ Github Repo for Browser Extension: https://github.com/maxmir20/siteation-extensi
 
 ### Usage:
 #### Viewing Site-ations:
-While navigating around the web, if a site has any site-ations, then the extension Icon will turn Green. If you land on a specific page that has been cited, the page's site-ation score will appear next to the extension icon.
-
 [Loom Video Demo - Viewing Site-ations](https://www.loom.com/share/7c5f427c92fe4559a9cddc7f56300e76?sid=4622ccbf-466e-44a7-a679-e0c1634d21a1) 
 
+While navigating around the web, if a site has any site-ations, then the extension Icon will turn Green <img width="29" height="24" alt="Screenshot 2025-10-16 at 2 55 50 PM" src="https://github.com/user-attachments/assets/c1733181-3eda-4fe1-b1a3-3ae0d85788cb" />. If you land on a specific page that has been cited, the page's site-ation score will appear next to the extension icon <img width="23" height="24" alt="Screenshot 2025-10-16 at 2 55 37 PM" src="https://github.com/user-attachments/assets/4557cece-11d5-4a9e-a1d8-612027e62a04" />.
+
 #### Adding Site-ations:
-If you see a link you would like to save for your PR, click the Site-ation icon once to add the link to your list of Site-ations.
-Once you are on your github PR page, double-click the icon to copy all your Site-ations onto your clipboard. Site-ations will be autoformatted to allow for easy pasting. 
+[Loom Video Demonstration - Adding Site-ations](https://www.loom.com/share/3365ee925f134b249249fde9e1031c56?sid=460e06c3-7d57-4a54-9b1f-bda5aa032c40)
+
+If you see a link you would like to save for your PR, click the Site-ation icon in your extension toolbar once to add the link to your list of Site-ations.
+Once you are on your github PR page, double-click the icon in your extension toolbar to copy all your Site-ations onto your clipboard. Site-ations will be automatically organized into a bibliography-style format to allow for easy pasting. 
 
 _Note: All currently stored Site-ations are deleted once you copy them to the clipboard_
 
-After listing your Site-ations in your PR description, the site-ations will be added **_once you merge your PR_**.
+After listing your Site-ations in your PR description, the Site-ations will be added **_once you merge your PR_**.
 
-[Loom Video Demonstration - Adding Site-ations](https://www.loom.com/share/3365ee925f134b249249fde9e1031c56?sid=460e06c3-7d57-4a54-9b1f-bda5aa032c40)
+<img width="492" height="571" alt="Screenshot 2025-10-16 at 3 16 05 PM" src="https://github.com/user-attachments/assets/5ee8fd4b-fc8f-44c8-a2a4-6617dac7e901" />
+
+
