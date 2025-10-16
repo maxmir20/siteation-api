@@ -1,9 +1,29 @@
 <img width="128" height="128" alt="icon_128" src="https://github.com/user-attachments/assets/f060d94f-e765-4440-80e0-9ae314f39a78" />
 
-# Siteation
-Site-ation is a Browser Extension and GitHub Action that uses DynamoDB to log when a site(be it a Blog Post, Stack Overflow Thread, or online guide) helped someone solve a problem in their PR!
+# Site-ation
+
+## What if you could use crowd-sourcing to see how often an online resource helped someone with a coding problem?
+### That's the idea behind Site-ation, an open-source collaborative database that lets developers credit the resources (e.g. webpages/articles/blogs/StackOverflow posts/etc) that helped them write their PR. 
+
+Site-d pages appear publicly for other users, allowing you to get a sense if a page has helped others before
+
+With Site-ation installed you can:
+1. See whether the website has been Site-d by any users <img width="29" height="24" alt="Screenshot 2025-10-16 at 2 55 50 PM" src="https://github.com/user-attachments/assets/c1733181-3eda-4fe1-b1a3-3ae0d85788cb" />
+2. See how often the page you're on has been Site-d by other users <img width="23" height="24" alt="Screenshot 2025-10-16 at 2 55 37 PM" src="https://github.com/user-attachments/assets/4557cece-11d5-4a9e-a1d8-612027e62a04" />
+
+3. Contribute Site-ations by including them in your PRs
+
+
+## Technical implementation
+Site-ation is a Browser Extension and GitHub Action that uses DynamoDB to store URLs
+
+<img width="820" height="341" alt="Screenshot 2025-09-14 at 7 10 30 PM" src="https://github.com/user-attachments/assets/739fe0ff-44b4-47f4-a18a-89cdc892aafb" />
+
 
 Site-ation aims to access as little information from your Org/Repo as possible. **No information or contents about your Identity, PR, Account, or Org are accessed or stored except for any URLs that are located under a "[Site-ations]" list in your initial PR's Issue Description section**.
+
+<img width="492" height="571" alt="Screenshot 2025-10-16 at 3 16 05 PM" src="https://github.com/user-attachments/assets/b40a7dd9-f5b8-43a6-8d5a-34e42fffa7ae" />
+
 
 ## Installation Instruction:
 ### Github App
@@ -21,7 +41,7 @@ Site-ation aims to access as little information from your Org/Repo as possible. 
 
 
 ### Browser Extension:
-From the Chrome Browser Extension Marketplace, install the Site-ation Extension:
+From the Chrome Browser Extension Marketplace, install the Site-ation Extension: https://chromewebstore.google.com/detail/nbflhjdhpokppngahofkpjgoamnnoffe?utm_source=item-share-cb
 
 Github Repo for Browser Extension: https://github.com/maxmir20/siteation-extension
 
