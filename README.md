@@ -12,6 +12,7 @@ With Site-ation installed you can:
 2. See how often the page you're on has been Site-d by other users <img width="23" height="24" alt="Screenshot 2025-10-16 at 2 55 37 PM" src="https://github.com/user-attachments/assets/4557cece-11d5-4a9e-a1d8-612027e62a04" />
 
 3. Contribute Site-ations by including them in your PRs
+<img width="600" height="268" alt="Screenshot 2025-10-16 at 3 26 07 PM" src="https://github.com/user-attachments/assets/e0a89016-c75c-4dda-a13d-4fa89037386c" />
 
 
 ## Technical implementation
