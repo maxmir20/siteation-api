@@ -42,7 +42,7 @@ Site-ation aims to access as little information from your Org/Repo as possible. 
 
 
 ### Browser Extension:
-From the Chrome Browser Extension Marketplace, install the Site-ation Extension: https://chromewebstore.google.com/detail/nbflhjdhpokppngahofkpjgoamnnoffe?utm_source=item-share-cb
+From the Chrome Browser Extension Marketplace, install the [Site-ation Extension](https://chromewebstore.google.com/detail/nbflhjdhpokppngahofkpjgoamnnoffe?utm_source=item-share-cb)
 
 Github Repo for Browser Extension: https://github.com/maxmir20/siteation-extension
 
